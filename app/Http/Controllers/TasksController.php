@@ -17,9 +17,14 @@ class TasksController extends Controller
     {
         $tasks = Task::all();
         
-        return view('tasks.index',[
-            'tasks' => $tasks,
+        if(\Auth::check()){
+            return view('tasks.index',[
+                'tasks' => $tasks,
             ]);
+        
+        }else{
+            return view('welcome');
+        }    
     }
 
     /**
@@ -51,6 +56,7 @@ class TasksController extends Controller
         $task = new Task;
         $task->content = $request->content;
         $task->status = $request->status;
+        $task->user_id = $request->user()->id;
         $task->save();
         
         return redirect('/');

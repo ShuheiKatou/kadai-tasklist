@@ -17,7 +17,10 @@ class CreateTasksTable extends Migration
             
             $table->bigIncrements('id');
             $table->string('content');
+            $table->string('status');
+            $table->biginteger('user_id')->unsigned();
             $table->timestamps();
+            
         });
     }
 
@@ -29,5 +32,6 @@ class CreateTasksTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tasks');
+
     }
 }
